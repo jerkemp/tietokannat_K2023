@@ -1,0 +1,11 @@
+a) SELECT DISTINCT owner FROM pet;
+
+b) SELECT name FROM pet ORDER BY name ASC;
+
+c) SELECT name FROM pet WHERE death IS NULL;
+
+d) SELECT DISTINCT owner FROM pet WHERE owner LIKE 'H%';
+
+e) SELECT name FROM pet WHERE name LIKE '%ff%';
+
+f) SELECT name FROM pet WHERE name LIKE '____';
