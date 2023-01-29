@@ -1,0 +1,33 @@
+a) SELECT * FROM employees ORDER BY last_name LIMIT 10;
+
+b) SELECT * FROM employees ORDER BY last_name, first_name LIMIT 10; 
+
+c) SELECT * FROM employees ORDER BY hire_date DESC LIMIT 5;
+
+d) SELECT first_name, last_name, salary FROM employees JOIN salaries ON employees.emp_no = salaries.emp_no ORDER BY salary DESC LIMIT 1;
+
+e) SELECT first_name, last_name, salary FROM employees JOIN salaries ON employees.emp_no = salaries.emp_no ORDER BY salary LIMIT 1;
+
+f) SELECT first_name, last_name, salary FROM employees JOIN salaries ON employees.emp_no = salaries.emp_no WHERE salary > 150000 AND salaries.to_date = "9999-01-01";   
+
+g) SELECT COUNT(emp_no),dept_name FROM dept_emp JOIN departments on departments.dept_no = dept_emp.dept_no WHERE to_date = "9999-01-01" AND ( dept_name = "Sales" OR dept_name = "Marketing") GROUP BY dept_name; 
+
++---------------+-----------+
+| COUNT(emp_no) | dept_name |
++---------------+-----------+
+|         14842 | Marketing |
+|         37701 | Sales     |
++---------------+-----------+
+
+h) SELECT first_name,last_name, dept_name FROM dept_manager JOIN departments ON dept_manager.dept_no = departments.dept_no JOIN employees ON dept_manager.emp_no = employees.emp_no;  
+
+i) SELECT dept_name, AVG(salary) FROM dept_emp JOIN departments ON dept_emp.dept_no = departments.dept_no
+    -> JOIN employees ON dept_emp.emp_no = employees.emp_no
+    -> JOIN salaries ON dept_emp.emp_no = salaries.emp_no
+    -> WHERE salaries.to_date = "9999-01-01" AND (dept_name = "sales" OR dept_name = "marketing") GROUP BY dept_name;
++-----------+-------------+
+| dept_name | AVG(salary) |
++-----------+-------------+
+| Marketing |  80014.6861 |
+| Sales     |  88842.1590 |
++-----------+-------------+

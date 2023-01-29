@@ -1,0 +1,56 @@
+owner taulun luonti:
+
+	mysql> CREATE TABLE owner (
+		-> first_name varchar(255),
+		-> last_name varchar(255),
+		-> address varchar(255),
+		-> ownerID int PRIMARY KEY AUTO_INCREMENT
+		-> );
+	Query OK, 0 rows affected (0.04 sec)
+
+	mysql> desc owner;
+	+------------+--------------+------+-----+---------+----------------+
+	| Field      | Type         | Null | Key | Default | Extra          |
+	+------------+--------------+------+-----+---------+----------------+
+	| first_name | varchar(255) | YES  |     | NULL    |                |
+	| last_name  | varchar(255) | YES  |     | NULL    |                |
+	| address    | varchar(255) | YES  |     | NULL    |                |
+	| ownerID    | int          | NO   | PRI | NULL    | auto_increment |
+	+------------+--------------+------+-----+---------+----------------+
+	4 rows in set (0.02 sec)
+
+
+pet taulun muokkaus
+
+	mysql> ALTER TABLE pet DROP COLUMN owner;
+	Query OK, 0 rows affected (0.05 sec)
+	Records: 0  Duplicates: 0  Warnings: 0
+
+	mysql> ALTER TABLE pet ADD COLUMN petID INT PRIMARY KEY AUTO_INCREMENT;
+	Query OK, 0 rows affected (0.12 sec)
+	Records: 0  Duplicates: 0  Warnings: 0
+
+	mysql> ALTER TABLE pet ADD COLUMN ownerID INT;
+	Query OK, 0 rows affected (0.03 sec)
+	Records: 0  Duplicates: 0  Warnings: 0
+
+	mysql> ALTER TABLE pet ADD CONSTRAINT FOREIGN KEY(ownerID) REFERENCES owner(ownerID);
+	Query OK, 8 rows affected (0.10 sec)
+	Records: 8  Duplicates: 0  Warnings: 0
+	
+	mysql> desc pet;
+	+---------+-------------+------+-----+---------+----------------+
+	| Field   | Type        | Null | Key | Default | Extra          |
+	+---------+-------------+------+-----+---------+----------------+
+	| name    | varchar(20) | YES  |     | NULL    |                |
+	| species | varchar(20) | YES  |     | NULL    |                |
+	| sex     | char(1)     | YES  |     | NULL    |                |
+	| birth   | date        | YES  |     | NULL    |                |
+	| death   | date        | YES  |     | NULL    |                |
+	| petID   | int         | NO   | PRI | NULL    | auto_increment |
+	| ownerID | int         | YES  | MUL | NULL    |                |
+	+---------+-------------+------+-----+---------+----------------+
+	7 rows in set (0.00 sec)
+	
+
+	

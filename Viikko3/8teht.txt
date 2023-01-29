@@ -1,0 +1,24 @@
+a) SELECT name FROM language ORDER BY name;
+
+b) SELECT title FROM film
+    -> JOIN film_actor ON film.film_id = film_actor.film_id
+    -> JOIN actor ON film_actor.actor_id = actor.actor_id
+    -> WHERE last_name = "Temple"
+    -> ORDER BY title;
+
+c) SELECT first_name,last_name FROM actor
+    -> JOIN film_actor ON film_actor.actor_id = actor.actor_id
+    -> JOIN film ON film.film_id = film_actor.film_id
+    -> WHERE title = "Ghost Groundhog"
+    -> ORDER BY last_name,first_name;
+
+d) SELECT COUNT(*) FROM film
+    -> JOIN film_category ON film.film_id = film_category.film_id
+    -> JOIN category ON category.category_id = film_category.category_id
+    -> WHERE name = "Horror";
+
+e)  SELECT title FROM film
+    -> JOIN film_category ON film.film_id = film_category.film_id
+    -> JOIN category ON category.category_id = film_category.category_id
+    -> WHERE name = "Horror"
+    -> ORDER BY title;
