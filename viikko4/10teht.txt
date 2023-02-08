@@ -1,0 +1,55 @@
+1) SELECT etunimi, sukunimi FROM opiskelija o JOIN arviointi a ON o.idOpiskelija = a.idOpiskelija
+    -> WHERE arvosana = 0;
++---------+----------+
+| etunimi | sukunimi |
++---------+----------+
+| Aku     | Ankka    |
++---------+----------+
+
+
+2)  SELECT etunimi, sukunimi FROM opiskelija o JOIN arviointi a ON o.idOpiskelija = a.idOpiskelija
+    -> JOIN opintojakso oj ON a.idOpintojakso = oj.idOpintojakso
+    -> WHERE arvosana > 0 AND nimi = 'Fysiikka 3';
++---------+----------+
+| etunimi | sukunimi |
++---------+----------+
+| Aku     | Ankka    |
+| Roope   | Ankka    |
+| Iines   | Ankka    |
+| Mikki   | Hiiri    |
+| Hessu   | Hopo     |
++---------+----------+
+
+3) SELECT etunimi, sukunimi, nimi AS opintojakso FROM opiskelija o JOIN arviointi a ON o.idOpiskelija = a.idOpiskelija
+    -> JOIN opintojakso oj ON a.idOpintojakso = oj.idOpintojakso
+    -> WHERE etunimi = 'Hessu';
++---------+----------+-------------+
+| etunimi | sukunimi | opintojakso |
++---------+----------+-------------+
+| Hessu   | Hopo     | Fysiikka 3  |
+| Hessu   | Hopo     | Tietokannat |
++---------+----------+-------------+
+
+4) SELECT etunimi, sukunimi, AVG(arvosana) AS keskiarvo FROM opiskelija o
+    -> JOIN arviointi a ON o.idOpiskelija = a.idOpiskelija
+    -> WHERE etunimi = 'Aku' GROUP BY etunimi, sukunimi;
++---------+----------+-----------+
+| etunimi | sukunimi | keskiarvo |
++---------+----------+-----------+
+| Aku     | Ankka    |    0.6667 |
++---------+----------+-----------+
+
+5) SELECT * FROM (
+    -> SELECT nimi, count(idArviointi) AS suoritukset FROM opintojakso o
+    -> LEFT JOIN arviointi a ON o.idOpintojakso = a.idOpintojakso
+    -> GROUP BY nimi) a
+    -> WHERE suoritukset = 0;
++--------------------------+-------------+
+| nimi                     | suoritukset |
++--------------------------+-------------+
+| Liike-elaman tapatietous |           0 |
+| Elektroniikan perusteet  |           0 |
+| Kellarihumppa            |           0 |
+| Matematiikka 2           |           0 |
+| VHDL-kieli               |           0 |
++--------------------------+-------------+
